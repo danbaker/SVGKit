@@ -34,4 +34,6 @@
 
 @property (nonatomic, retain) NSDate* startRenderTime, * endRenderTime; /*< for debugging, lets you know how long it took to add/generate the CALayer (may have been cached! Only SVGKImage knows true times) */
 
+- (int) countNestedSublayer;
+
 @end

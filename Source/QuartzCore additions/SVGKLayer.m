@@ -82,4 +82,19 @@
 	}
 }
 
+- (int) countNestedSublayer
+{
+    return [self countSublayersIn:self];
+}
+- (int)countSublayersIn:(CALayer*)theLayer
+{
+    int cnt = 0;
+    for(CALayer *layer in theLayer.sublayers)
+    {
+        cnt++;
+        cnt += [self countSublayersIn:layer];
+    }
+    return cnt;
+}
+
 @end

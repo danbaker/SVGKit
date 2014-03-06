@@ -137,6 +137,21 @@
     label.alignmentMode = kCAAlignmentLeft;
     label.foregroundColor = [UIColor blackColor].CGColor;
 
+    // DOMO DANB PATCH: Add support for "text-anchor" "start", "middle", "end"
+    NSString* textAnchor = [self cascadedValueForStylableProperty:@"text-anchor"];
+    NSLog(@"SVG: textAnchor=%@:  %@", textAnchor, effectiveText);
+    if ([textAnchor isEqualToString:@"middle"])
+    {
+        CGRect frame = label.frame;
+        frame.origin = CGPointMake(frame.origin.x - frame.size.width/2, frame.origin.y);
+        label.frame = frame;
+    }
+    else if ([textAnchor isEqualToString:@"end"])
+    {
+        CGRect frame = label.frame;
+        frame.origin = CGPointMake(frame.origin.x - frame.size.width, frame.origin.y);
+        label.frame = frame;
+    }
 	/** VERY USEFUL when trying to debug text issues:
 	label.backgroundColor = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5].CGColor;
 	label.borderColor = [UIColor redColor].CGColor;
